@@ -91,6 +91,9 @@ void Grid::update()
                     this->siguiente[i][j] = 1;
                 }else{
                 if(this->tablero[i+1][j+2]==0)
+                {
+                      this->siguiente[i][j] = 1;
+                }
                 }
 
             }
