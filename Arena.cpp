@@ -1,24 +1,13 @@
-#include "Rectangle.hpp"
+#include "Arena.hpp"
 #include <math.h>
 #include <iostream>
 using namespace std;
 
-Rectangle::Rectangle(Vector2f size)
+Arena::Arena(Vector2f size)
 {
-    this->shape = RectangleShape(size);
-    this->speed = Vector2f(0.f, 0.f);
-    this->objective = Vector2f(0.f, 0.f);
-    this->shape.setFillColor(Color::Blue);
-    /**  (4pts)
-        Inicializa las variables:
-        - shape: un rectángulo de tamaño size.
-        - speed: un Vector2f con valores (0, 0).
-        - objective: un Vector2f con valores (0, 0).
-        - Haz que el cuadrado se pinte de un color.
-    */
 }
 
-Rectangle::Rectangle(Vector2f size, Vector2i position)
+R::Rectangle(Vector2f size, Vector2i position)
 {
     this->shape = RectangleShape(size);
     this->speed = Vector2f(0.f, 0.f);
