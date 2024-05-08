@@ -78,61 +78,52 @@ void Grid::update()
         for (int j = 0; j < this->cols; j++)
         {
             int vecinos = this->calcularVecinos(i, j);
-            if (this->tablero[i][j+1] == 1)
+            if (this->tablero[i][j + 1] == 1)
             {
-
-                if (this->tablero[i-1][j + 2]==0)
-                {
-                     this->siguiente[i][j] = 1;
-                }
-            }else{
-                if(this->tablero[i-1][j+2]==0)
-                {
-                    this->siguiente[i][j] = 1;
-                }else{
-                if(this->tablero[i+1][j+2]==0)
-                {
-                      this->siguiente[i][j] = 1;
-                }
-                }
-
-            }
-
-
-
-
-                if (vecinos < 2 || vecinos > 3)
-                {
-                    this->siguiente[i][j] = 0;
-                }
-                else
+                // izquierda
+                if (this->tablero[i - 1][j + 2] == 0)
                 {
                     this->siguiente[i][j] = 1;
                 }
             }
             else
             {
-                if (vecinos == 3)
+                if (this->tablero[i + 1][j + 2] == 0)
                 {
                     this->siguiente[i][j] = 1;
                 }
-                else
-                {
-                    this->siguiente[i][j] = 0;
-                }
+            }
+
+            if (vecinos < 2 || vecinos > 3)
+            {
+                this->siguiente[i][j] = 0;
+            }
+            else
+            {
+                this->siguiente[i][j] = 1;
+            }
+        }
+        else
+        {
+            if (vecinos == 3)
+            {
+                this->siguiente[i][j] = 1;
+            }
+            else
+            {
+                this->siguiente[i][j] = 0;
             }
         }
     }
+}
 
-    this->tablero = this->siguiente;
+this->tablero = this->siguiente;
 }
 
 int Grid::calcularVecinos(int i, int j)
 {
     int arena = 0;
 
-
-   
     // abajo a la izquierda
     if (i > 0 && j < this->cols - 1 && this->tablero[i - 1][j + 1] == 1)
         arena++;
