@@ -78,8 +78,26 @@ void Grid::update()
         for (int j = 0; j < this->cols; j++)
         {
             int vecinos = this->calcularVecinos(i, j);
-            if (this->tablero[i][j] == 1)
+            if (this->tablero[i][j+1] == 1)
             {
+
+                if (this->tablero[i-1][j + 2]==0)
+                {
+                     this->siguiente[i][j] = 1;
+                }
+            }else{
+                if(this->tablero[i-1][j+2]==0)
+                {
+                    this->siguiente[i][j] = 1;
+                }else{
+                if(this->tablero[i+1][j+2]==0)
+                }
+
+            }
+
+
+
+
                 if (vecinos < 2 || vecinos > 3)
                 {
                     this->siguiente[i][j] = 0;
@@ -117,7 +135,7 @@ int Grid::calcularVecinos(int i, int j)
         arena++;
     // // abajo
     if (j < this->cols - 1 && this->tablero[i][j + 1] == 1)
-        vecinos++;
+        ++;
     // abajo a la derecha
     if (i < this->rows - 1 && j < this->cols - 1 && this->tablero[i + 1][j + 1] == 1)
         vecinos++;
