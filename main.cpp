@@ -1,18 +1,17 @@
-#include "Rectangle.hpp"
 #include <SFML/Graphics.hpp>
-#include <vector>
-#include <iostream>
+#include "Grid.hpp"
 using namespace sf;
-using namespace std;
+
+int numCells = 20;
+int width = 700;
+int height = 700;
 
 int main()
 {
-    // setup
-    RenderWindow window(VideoMode(800, 600), "SFML works!");
-    window.setFramerateLimit(30);
-    Rectangle rect(Vector2f(30, 30));
-
-    // loop
+    bool play = false;
+    RenderWindow window(VideoMode(width, height), "SFML works!");
+    window.setFramerateLimit(5);
+    Grid grid(numCells, width, height);
     while (window.isOpen())
     {
         Event event;
@@ -20,26 +19,29 @@ int main()
         {
             if (event.type == Event::Closed)
                 window.close();
-            Event event;
+
             if (event.type == Event::MouseButtonPressed)
             {
                 if (event.mouseButton.button == Mouse::Left)
                 {
-                    int xo = event.mouseButton.x;
-                    int yo = event.mouseButton.y;
-                    Vector2i position(xo, yo);
-                    /** (5pts)
-                        Cuando se de click izquierdo, se deberá actualizar el objetivo del cuadrado a la posición del mouse.
-                    */
+                    int x = event.mouseButton.x;
+                    int y = event.mouseButton.y;
+                    grid.toggle(x, y);
                 }
-
-                window.clear();
-                rect.update();
-                rect.drawTo(window);
-                window.display();
+                if (event.mouseButton.button == Mouse::Right)
+                {
+                    play = !play;
+                }
             }
 
-            return 0;
         }
+
+        window.clear();
+        if (play)
+            grid.update();
+        grid.drawTo(window);
+        window.display();
     }
-)
+
+    return 0;
+}
