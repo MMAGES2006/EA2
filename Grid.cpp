@@ -46,7 +46,7 @@ void Grid::drawTo(RenderWindow &window)
             rect.setPosition(Vector2f(j * sizeX, i * sizeY));
             rect.setOutlineThickness(1);
             rect.setOutlineColor(Color::Black);
-            if (tablero[j][i] == 1)
+            if (tablero[i][j] == 1)
             {
                 rect.setFillColor(Color::Blue);
             }
@@ -68,27 +68,34 @@ void Grid::toggle(int x, int y)
 
 void Grid::update()
 {
-    //int caida = 1; 
-    /*
-        para cada celda:
-        calcular cuantos vecinos vivos tiene
-        ver si está viva o muerta en el siguiente a partir de los vecinos
-    */
-
     for (int i = 0; i < this->rows; i++)
     {
         for (int j = 0; j < this->cols; j++)
         {
-            if (this->tablero[i][j] == 1)
-            {
+            if (this->tablero[i][j] == 1){
 
-                if (j < this-> rows - 1 && tablero[i][j + 1] == 0)
+                if (i < this->rows - 1 && tablero[i + 1][j] == 0)
                 {
-                    this->siguiente[i][j] = 0;
-                    this->siguiente[i][j+ 1] = 1; 
-                }      
-            }
+                    siguiente[i + 1][j] = 1;
+                    siguiente[i][j] = 0;
+
+                }
+                else if (i < this->rows - 2 && j < this->cols - 1 && tablero[i + 2][j + 1] == 0)
+                {
+                siguiente[i + 1][j + 1] = 1;
+                    siguiente[i][j] = 0;
+                }
+                else if (i < this->rows - 2 && j > 0 && tablero[i + 2][j - 1] == 0)
+                {
+                    siguiente[i + 1][j - 1] = 1;
+                    siguiente[i][j] = 0;
+                }
+                else
+                {
+                    siguiente[i][j] = 1;
+                }
+            }      
         }
+    }
         this->tablero = this->siguiente;
     }
-}
