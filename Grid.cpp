@@ -68,6 +68,7 @@ void Grid::toggle(int x, int y)
 
 void Grid::update()
 {
+    int caida = 1; 
     /*
         para cada celda:
         calcular cuantos vecinos vivos tiene
@@ -78,34 +79,18 @@ void Grid::update()
     {
         for (int j = 0; j < this->cols; j++)
         {
-            int vecinos = this->calcularVecinos(i, j);
-            if (this->tablero[i][j + 1] == 1); 
+            if (this->tablero[i][j] == 1){
 
-            // izquierda
-                if (this->tablero[i - 1][j + 2] == 0)
+                if (this->tablero[i][j + caida] == 0)
                 {
-                    this->siguiente[i][j] = 1;
-                }
-            else
-            {
-                if (this->tablero[i + 1][j + 2] == 0)
-                {
-                    this->siguiente[i][j] = 1;
-                }
-            }
+                    this->siguiente[i][j] = 0;
 
-            if (vecinos < 2 || vecinos > 3)
-            {
-                this->siguiente[i][j] = 0;
-            }
-            else
-            {
-                this->siguiente[i][j] = 1;
-            }
+                }
+            }      
         }
     }
+    this->tablero = this->siguiente;
 }
 
-this->tablero = this->siguiente;
-}
+
 
