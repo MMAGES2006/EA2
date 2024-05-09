@@ -15,6 +15,7 @@ Grid::Grid(int rows, int cols)
 
     this->siguiente = vector<vector<int>>(rows, vector<int>(cols, 0));
 }
+
 Grid::Grid(int n, int w, int h)
 {
     this->rows = n;
@@ -47,7 +48,7 @@ void Grid::drawTo(RenderWindow &window)
             rect.setOutlineColor(Color::Black);
             if (tablero[j][i] == 1)
             {
-                rect.setFillColor(Color::Green);
+                rect.setFillColor(Color::Blue);
             }
             window.draw(rect);
         }
@@ -78,14 +79,13 @@ void Grid::update()
         for (int j = 0; j < this->cols; j++)
         {
             int vecinos = this->calcularVecinos(i, j);
-            if (this->tablero[i][j + 1] == 1)
-            {
-                // izquierda
+            if (this->tablero[i][j + 1] == 1); 
+
+            // izquierda
                 if (this->tablero[i - 1][j + 2] == 0)
                 {
                     this->siguiente[i][j] = 1;
                 }
-            }
             else
             {
                 if (this->tablero[i + 1][j + 2] == 0)
@@ -103,36 +103,9 @@ void Grid::update()
                 this->siguiente[i][j] = 1;
             }
         }
-        else
-        {
-            if (vecinos == 3)
-            {
-                this->siguiente[i][j] = 1;
-            }
-            else
-            {
-                this->siguiente[i][j] = 0;
-            }
-        }
     }
 }
 
 this->tablero = this->siguiente;
 }
 
-int Grid::calcularVecinos(int i, int j)
-{
-    int arena = 0;
-
-    // abajo a la izquierda
-    if (i > 0 && j < this->cols - 1 && this->tablero[i - 1][j + 1] == 1)
-        arena++;
-    // // abajo
-    if (j < this->cols - 1 && this->tablero[i][j + 1] == 1)
-        ++;
-    // abajo a la derecha
-    if (i < this->rows - 1 && j < this->cols - 1 && this->tablero[i + 1][j + 1] == 1)
-        vecinos++;
-
-    return vecinos;
-}

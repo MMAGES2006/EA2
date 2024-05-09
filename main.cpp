@@ -2,13 +2,12 @@
 #include "Grid.hpp"
 using namespace sf;
 
-int numCells = 20;
-int width = 700;
-int height = 700;
+int numCells = 50;
+int width = 800;
+int height = 800;
 
 int main()
 {
-    bool play = false;
     RenderWindow window(VideoMode(width, height), "SFML works!");
     window.setFramerateLimit(60);
     Grid grid(numCells, width, height);
@@ -28,16 +27,10 @@ int main()
                     int y = event.mouseButton.y;
                     grid.toggle(x, y);
                 }
-                if (event.mouseButton.button == Mouse::Right)
-                {
-                    play = !play;
-                }
             }
         }
 
-        window.clear();
-        if (play)
-            grid.update();
+        grid.update();
         grid.drawTo(window);
         window.display();
     }
