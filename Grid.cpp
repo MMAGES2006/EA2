@@ -84,6 +84,7 @@ void Grid::update()
                 if (this->tablero[i][j + caida] == 0)
                 {
                     this->siguiente[i][j] = 0;
+                    this->siguiente[i][j+ caida] = 1; 
 
                 }
             }      

@@ -2,14 +2,14 @@
 #include "Grid.hpp"
 using namespace sf;
 
-int numCells = 50;
-int width = 800;
-int height = 800;
+int numCells = 25;
+int width = 500;
+int height = 500;
 
 int main()
 {
     RenderWindow window(VideoMode(width, height), "SFML works!");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(30);
     Grid grid(numCells, width, height);
     while (window.isOpen())
     {
