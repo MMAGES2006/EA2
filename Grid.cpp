@@ -79,16 +79,16 @@ void Grid::update()
     {
         for (int j = 0; j < this->cols; j++)
         {
-            if (this->tablero[i][j] == 1){
+            if (this->tablero[i][j] == 1)
+            {
 
-                if (this->tablero[i][j + 1] == 0)
+                if (j < this-> rows - 1 && tablero[i][j + 1] == 0)
                 {
                     this->siguiente[i][j] = 0;
                     this->siguiente[i][j+ 1] = 1; 
-
-                }
-            }      
+                }      
+            }
         }
+        this->tablero = this->siguiente;
     }
-    this->tablero = this->siguiente;
 }
